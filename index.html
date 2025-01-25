@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP Currency Converter</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Rockwell;
+            background-color: black;
+            color: white;
+        }
+        kbd, p {
+            font-size: 50px;
+        }
+        img {
+            height: 150px;
+            width: 140px;
+        }
+        a {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        #audiowideFont {
+            font-family: 'Audiowide', sans-serif;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+</head>
+<body>
+<br><br>
+
+<div class="container">
+    <center>
+        <img src="bnwmoneyicon.webp" style="width: 550px; height: 350px;">
+        <br><br>
+
+        <div class="col-md-12">
+            <h2 id="audiowideFont">PHP Currency Converter</h2>
+        </div>
+    </center>
+    <br>
+
+    <center>
+        <div class="col-md-12">
+            <input id="pesoInput" type="number" class="form-control" placeholder="Enter PHP Amount" style="width: 300px; text-align: center; margin-bottom: 20px;">
+            <select id="currencySelect" class="form-control" style="width: 300px; text-align: center;">
+                <option value="usd">USD (Dollar)</option>
+                <option value="baht">THB (Baht)</option>
+                <option value="yen">JPY (Yen)</option>
+                <option value="euro">EUR (Euro)</option>
+                <option value="pound">GBP (Pound)</option>
+            </select>
+            <br>
+            <button id="audiowideFont" type="button" class="btn btn-primary" onclick="convertCurrency()">Convert</button>
+            <p id="display" style="margin-top: 20px;"></p>
+        </div>
+    </center>
+</div>
+
+<script>
+    function convertCurrency() {
+        const php = parseFloat(document.getElementById("pesoInput").value);
+        const currency = document.getElementById("currencySelect").value;
+
+        if (isNaN(php) || php <= 0) {
+            document.getElementById("display").innerHTML = "<kbd>Please enter a valid PHP amount.</kbd>";
+            return;
+        }
+
+        let rate, result, currencyName;
+
+        switch (currency) {
+            case 'usd':
+                rate = 58.66;
+                currencyName = "USD";
+                break;
+            case 'baht':
+                rate = 1.69;
+                currencyName = "THB";
+                break;
+            case 'yen':
+                rate = 0.38;
+                currencyName = "JPY";
+                break;
+            case 'euro':
+                rate = 62.90;
+                currencyName = "EUR";
+                break;
+            case 'pound':
+                rate = 73.50;
+                currencyName = "GBP";
+                break;
+        }
+
+        result = php / rate;
+        document.getElementById("display").innerHTML = `<kbd>${php} PHP = ${result.toFixed(2)} ${currencyName}</kbd>`;
+    }
+</script>
+
+<br>
+<center>
+    <div class="col-md-12">
+        <a href="index.html"><button class="btn btn-success btn-lg">Refresh</button></a>
+    </div>
+</center>
+</body>
+</html>
